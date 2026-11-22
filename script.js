@@ -188,3 +188,59 @@ document.getElementById("editarFicha").addEventListener("click", function () {
 
     alert("Ya puedes modificar los datos de tu ficha técnica.");
 });
+// Descargar ficha técnica en Word
+document.getElementById("descargarWord").addEventListener("click", async function () {
+    const ficha = obtenerFicha();
+
+    if (!ficha.nombre) {
+        alert("Primero escribe el nombre de la ficha.");
+        return;
+    }
+
+    const { Document, Packer, Paragraph, HeadingLevel } = window.docx;
+
+    const secciones = [
+        ["Categoría", ficha.categoria],
+        ["Descripción", ficha.descripcion],
+        ["Características técnicas", ficha.caracteristicas],
+        ["Materiales o recursos", ficha.materiales],
+        ["Procedimiento", ficha.procedimiento],
+        ["Observaciones", ficha.observaciones]
+    ];
+
+    const contenido = [
+        new Paragraph({
+            text: "FICHA TÉCNICA",
+            heading: HeadingLevel.TITLE
+        }),
+        new Paragraph({
+            text: ficha.nombre,
+            heading: HeadingLevel.HEADING_1
+        })
+    ];
+
+    secciones.forEach(([titulo, valor]) => {
+        if (valor) {
+            contenido.push(
+                new Paragraph({
+                    text: titulo,
+                    heading: HeadingLevel.HEADING_2
+                }),
+                new Paragraph({ text: valor })
+            );
+        }
+    });
+
+    const documento = new Document({
+        sections: [{ children: contenido }]
+    });
+
+    const archivo = await Packer.toBlob(documento);
+
+    const enlace = document.createElement("a");
+    enlace.href = URL.createObjectURL(archivo);
+    enlace.download = "Ficha_Tecnica.docx";
+    enlace.click();
+
+    URL.revokeObjectURL(enlace.href);
+});
