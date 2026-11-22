@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FichaLab - Generador de Fichas Tecnicas</title>
+    <link rel="stylesheet" href=styles.css>
+</head>
+
+<body>
+
+    <header>
+        <h1>FichaLab</h1>
+        <p>Generador inteligente de fichas tecnicas</p>
+    </header>
+
+    <main>
+
+        <section class="contenedor">
+            <h2>Crear nueva ficha tecnica</h2>
+
+            <form id="formulario">
+
+                <label>Nombre de la ficha:</label>
+                <input type="text" id="nombre" required>
+
+                <label>Categoria:</label>
+                <select id="categoria" required>
+                    <option value="">Seleccione una categoria</option>
+                    <option>Producto</option>
+                    <option>Servicio</option>
+                    <option>Procedimiento</option>
+                    <option>Equipo</option>
+                    <option>Material</option>
+                </select>
+
+                <label>Descripción:</label>
+                <textarea id="descripcion" required></textarea>
+
+                <label>Características técnicas:</label>
+                <textarea id="caracteristicas"></textarea>
+
+                <label>Materiales o recursos:</label>
+                <textarea id="materiales"></textarea>
+
+                <label>Procedimiento:</label>
+                <textarea id="procedimiento"></textarea>
+
+                <label>Observaciones:</label>
+                <textarea id="observaciones"></textarea>
+
+                <button type="button" id="generar">
+                    Generar ficha técnica
+                </button>
+<button type="button" id="analizar">
+    Analizar ficha con Inteligencia Artificial
+</button><button type="button" id="descargarPDF">
+    Descargar ficha en PDF
+</button><button type="button" id="editarFicha">
+    Editar ficha técnica
+</button>
+            </form>
+        </section>
+
+        <section class="contenedor">
+            <h2>Vista previa de la ficha</h2>
+
+            <div id="resultado">
+                <p>Aquí aparecerá tu ficha técnica.</p>
+            </div>
+
+        </section>
+
+    </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
+</body>
